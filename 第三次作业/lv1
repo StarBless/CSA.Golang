@@ -1,0 +1,41 @@
+package main
+
+import (
+	"fmt"
+	"sync"
+	"time"
+)
+
+var w sync.WaitGroup
+
+func main() {
+	w.Add(3)
+	go A(2021)
+	time.Sleep(time.Millisecond * 1)
+	go B(21)
+	time.Sleep(time.Millisecond * 1)
+	go C(76)
+	w.Wait()
+}
+
+func A(A int) {
+	for i := 1; i <= 10; i++ {
+		time.Sleep(time.Millisecond * 80)
+		fmt.Println(A)
+	}
+	w.Done()
+}
+func B(B int) {
+	for i := 1; i <= 10; i++ {
+		time.Sleep(time.Millisecond * 80)
+		fmt.Println(B)
+	}
+	w.Done()
+}
+func C(C int) {
+	for i := 1; i <= 10; i++ {
+		time.Sleep(time.Millisecond * 80)
+		fmt.Println(C)
+	}
+	w.Done()
+}
